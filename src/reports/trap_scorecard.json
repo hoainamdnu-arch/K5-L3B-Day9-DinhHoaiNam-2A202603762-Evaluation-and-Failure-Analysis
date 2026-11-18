@@ -1,0 +1,56 @@
+{
+  "evaluator_errors_as_nan": {
+    "exit_code": 1,
+    "blocked": [
+      "integrity"
+    ],
+    "lines": [
+      "  INTEGRITY PR: missing/invalid row score refund_amount_correct",
+      "  INTEGRITY PR: missing/invalid row score pass_rate",
+      "  INTEGRITY PR: missing/invalid row score proposal_correct"
+    ]
+  },
+  "dropped_failing_rows": {
+    "exit_code": 1,
+    "blocked": [
+      "integrity"
+    ],
+    "lines": [
+      "  INTEGRITY PR: row count differs from items x seeds",
+      "  INTEGRITY PR: rows are not the unique complete item x seed grid",
+      "  INTEGRITY PR: missing/non-finite metric pass_hat_5",
+      "  INTEGRITY invalid report/spec structure: ValueError"
+    ]
+  },
+  "cherry_picked_seeds": {
+    "exit_code": 1,
+    "blocked": [
+      "integrity"
+    ],
+    "lines": [
+      "  INTEGRITY PR: missing/non-finite metric pass_hat_5",
+      "  INTEGRITY invalid report/spec structure: ValueError"
+    ]
+  },
+  "loosened_spec": {
+    "exit_code": 1,
+    "blocked": [
+      "integrity"
+    ],
+    "lines": [
+      "  INTEGRITY ratchet: weakened db_fact_kept/min",
+      "  INTEGRITY ratchet: weakened refund_amount_correct/min",
+      "  INTEGRITY ratchet: removed refund_amount_correct/no_significant_drop",
+      "  INTEGRITY ratchet: weakened pass_rate/min",
+      "  INTEGRITY ratchet: removed pass_rate/no_significant_drop",
+      "  INTEGRITY ratchet: weakened pass_hat_5/min",
+      "  INTEGRITY ratchet: weakened reply_amount_correct/min",
+      "  INTEGRITY ratchet: removed reply_amount_correct/no_significant_drop",
+      "  INTEGRITY ratchet: weakened proposal_correct/min",
+      "  INTEGRITY ratchet: removed proposal_correct/no_significant_drop",
+      "  INTEGRITY ratchet: removed slices/('denial', 'pass_rate')",
+      "  INTEGRITY ratchet: removed slices/('money_movement', 'pass_rate')",
+      "  INTEGRITY ratchet: removed slices/('adversarial', 'pass_rate')"
+    ]
+  }
+}

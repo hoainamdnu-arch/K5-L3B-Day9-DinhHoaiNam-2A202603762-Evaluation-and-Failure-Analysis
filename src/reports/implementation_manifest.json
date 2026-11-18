@@ -1,0 +1,42 @@
+{
+  "sha256": "94b9da74596fe81d63667674b158f3a50516c1decc20723424ba076fa1a018f1",
+  "files": {
+    "src/config/autonomy_policy.yaml": "6df9f4c0f9d9f720278afb378aa2e2fd114cf55cd3b8480d1102e99164d83ecd",
+    "src/config/fm_map.yaml": "493cb67516567815de381ebbce4f0890b5dfc1eb2d46afab69baa824e8a9c43a",
+    "src/config/metric_spec.yaml": "15b902689a4eeeafc0c387c3fa78793303730f3872337c062fe1caa1d8da9677",
+    "src/config/metric_spec_v2.yaml": "c820b58fcd5938e5096e8ab7d0544026a86e03f59ee8c8b3c07709212bb24cba",
+    "src/config/pricing.yaml": "ff96a71186cfe5f2a88deb59fd77ccff14435e050458bf2b30f823c3e5141797",
+    "src/config/tools.manifest.v1.1.yaml": "8bd8147d6e862abb1dbaf80992a18373c7589d6765125d1d19b2c0240f4866a2",
+    "src/lab9/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/lab9/ci_check.py": "9f02e97ba3d610c23d38a7c9237d0ba86e739eefc9348b302fee355df230d826",
+    "src/lab9/eval.py": "a5779a78206f1cebe9213517183ab1ab325a64a6c8e97fffc0cc5492aa8a55b5",
+    "src/lab9/evalset.py": "b5b0cf74e9df91b47e4ec401d4f18fd5ed5b3fce69e60c0f956b5a42b729affa",
+    "src/lab9/gate.py": "d0ea76f8781967e0acb50f593246daa15df04c2bff99bd585b3ae3a184251532",
+    "src/lab9/graders.py": "ac6c48ad8f4a25c0dab362bd94354814681a8028b607373edb0c973c23c6e785",
+    "src/lab9/judge.py": "16db1953a097a306c4d3c7bddf33fceb3a9c2845313d97068c7e724a106c622d",
+    "src/lab9/mutation.py": "7f1f7067ae66e018e3ee36f77ad450c032929737f71f722c2064fee7351c6bea",
+    "src/lab9/reporting.py": "3afe3a22c1fe81495398bd1cc43ef2452dbbfe04b3bffdb3356a422d2bc2e90f",
+    "src/lab9/reproduce.py": "aa0c71b4a930eb1255dcc53415924a99691c8a52c5f97e9abdbfa19989018674",
+    "src/lab9/smoke.py": "bf261040b2c5d9ad6c416527cf24c501ae923c537856d1a08be6a1e97799e022",
+    "src/lab9/stats.py": "d0c0e2164b729ccbe51fb4097d0ce2a55b8a15ddeb9863c184cb0df827eeee9a",
+    "src/lab9/templates/eval_card.md": "683166ea0fa1a36289fd77cb8be12151aa8cfc441159c24c8727bc3ce12bb374",
+    "src/lab9/templates/pr_description.md": "3c1518a5ff011efe050bf56710fbb574bb0bb2037bc6954e097e708b102a9d40",
+    "src/lab9/templates/prd.md": "62045dde04bf5c75e980a773db19fb5288ad9388ab2c69a613b420077b3a835d",
+    "src/lab9/trace_case.py": "cdfef8cf6b5c2ec7efc621ec4d99ba2b324b93557f88f0a21de42fae6372a71a",
+    "src/lab9/traps.py": "5a631060b0069ba6b21006bf8e352a99dde5084fca01423eab3b531fff7d09dc",
+    "src/lab9/variant_agent.py": "1b007919fe0f0e565be9920bc246e76d973b60e59db91783363eb8df5fbf8d47",
+    "src/lab9/variants.py": "60573d1e8843d87b47a59c865c14ca2a15b5c3742497c22a8aae7267fb2311cd",
+    "src/tests/test_lab9_advanced.py": "a0c94001134bc83fb7c09ea8dcb3f57b57dcc274174e16e4dcebc7cdab4fadd0",
+    "src/tests/test_lab9_evalset.py": "dfc94e3d7aa9801b05fa167269f3fc364dbadb75b89e1d5ce696042411950ec4",
+    "src/tests/test_lab9_graders.py": "c6abc02bafe8925b3fa571d6b2df9a9c2099f9b5d2e506d3a32e63e408fded5d",
+    "src/tests/test_lab9_regressions.py": "99b19485e5c79811951b70de297ee1ffb1e708a880b71842ae9715ce10bbcbef",
+    "src/tests/test_lab9_stats.py": "8bad97f4a60971891213eaa47203aabf1c66e5a8ba86ebe87f3242122c2290da"
+  },
+  "packages": {
+    "pydantic-evals": "2.68.0",
+    "numpy": "2.5.5",
+    "scipy": "1.18.1",
+    "pytest": "8.4.2",
+    "PyYAML": "6.0.3"
+  }
+}

@@ -12,10 +12,12 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 from lab9.eval import SPEC, load_spec
 from lab9.graders import GRADERS
+from lab8.console import utf8_stdio
 
 STARTER_METRICS = {"approval_bypass", "secret_leak", "db_fact_kept", "refund_amount_correct",
                    "pass_rate", "pass_5", "cost_per_success"}
@@ -38,10 +40,18 @@ def check(pr: dict, base: dict, spec: dict) -> list[str]:
     if base.get("manifest", {}).get("eval_set_sha") != pr.get("manifest", {}).get("eval_set_sha"):
         problems.append("baseline eval_set_sha differs from the current eval set: re-run the baseline")
     shared = sorted(base.get("metrics", {}).keys() & pr.get("metrics", {}).keys())
+    if base.get("metrics", {}).keys() != pr.get("metrics", {}).keys():
+        problems.append("baseline metric coverage differs from the fresh swarm run")
+    for key in ("items", "seeds"):
+        if base.get("manifest", {}).get(key) != pr.get("manifest", {}).get(key):
+            problems.append(f"baseline manifest {key} differs from the fresh swarm run")
     for k in shared:
         if not _same(base["metrics"][k], pr["metrics"][k]):
             problems.append(f"baseline metric {k} differs from CI's swarm run: re-run, never hand-edit")
-    own = [m for m in spec["metrics"] if m["id"] not in STARTER_METRICS
+    # pass@k/pass^k are derived from pass_rate rows by lab9.eval.aggregate;
+    # they do not have a per-trial pydantic-evals Evaluator.
+    derived = lambda mid: re.fullmatch(r"pass_(?:at|hat)_\d+", mid) is not None
+    own = [m for m in spec["metrics"] if m["id"] not in STARTER_METRICS and not derived(m["id"])
            and m.get("kind") == "capability" and m.get("blocking")]
     if not own:
         problems.append("spec has no blocking capability metric of your own (M3: the FM-08 catcher)")
@@ -52,6 +62,7 @@ def check(pr: dict, base: dict, spec: dict) -> list[str]:
 
 
 def main(argv: list[str] | None = None) -> int:
+    utf8_stdio()
     ap = argparse.ArgumentParser(prog="lab9.ci_check")
     ap.add_argument("--pr", required=True, help="the CI's own swarm report")
     ap.add_argument("--baseline", required=True)

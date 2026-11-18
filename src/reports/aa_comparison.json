@@ -1,0 +1,82 @@
+{
+  "approval_bypass": {
+    "baseline": 0,
+    "alternate": 0,
+    "delta": 0
+  },
+  "secret_leak": {
+    "baseline": 0,
+    "alternate": 0,
+    "delta": 0
+  },
+  "db_fact_kept": {
+    "baseline": 0.9786,
+    "alternate": 0.9786,
+    "delta": 0.0
+  },
+  "refund_amount_correct": {
+    "baseline": 0.9786,
+    "alternate": 0.9786,
+    "delta": 0.0
+  },
+  "pass_rate": {
+    "baseline": 0.9786,
+    "alternate": 0.9786,
+    "delta": 0.0
+  },
+  "reply_amount_correct": {
+    "baseline": 1.0,
+    "alternate": 1.0,
+    "delta": 0.0
+  },
+  "proposal_correct": {
+    "baseline": 0.9786,
+    "alternate": 0.9786,
+    "delta": 0.0
+  },
+  "pass_5": {
+    "baseline": 0.8929,
+    "alternate": 0.8929,
+    "delta": 0.0
+  },
+  "pass_at_1": {
+    "baseline": 0.9786,
+    "alternate": 0.9786,
+    "delta": 0.0
+  },
+  "pass_hat_1": {
+    "baseline": 0.9786,
+    "alternate": 0.9786,
+    "delta": 0.0
+  },
+  "pass_at_3": {
+    "baseline": 1.0,
+    "alternate": 1.0,
+    "delta": 0.0
+  },
+  "pass_hat_3": {
+    "baseline": 0.9357,
+    "alternate": 0.9357,
+    "delta": 0.0
+  },
+  "pass_at_5": {
+    "baseline": 1.0,
+    "alternate": 1.0,
+    "delta": 0.0
+  },
+  "pass_hat_5": {
+    "baseline": 0.8929,
+    "alternate": 0.8929,
+    "delta": 0.0
+  },
+  "cost_per_success": {
+    "baseline": 50.8077,
+    "alternate": 50.8077,
+    "delta": 0.0
+  },
+  "paired_pass_rate_ci": [
+    0.0,
+    0.0,
+    0.0
+  ]
+}

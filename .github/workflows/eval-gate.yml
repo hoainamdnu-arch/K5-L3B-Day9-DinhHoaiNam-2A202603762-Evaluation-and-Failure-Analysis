@@ -26,19 +26,25 @@ jobs:
     defaults: {run: {working-directory: src}}
     steps:
       - uses: actions/checkout@v7
-        with: {persist-credentials: false}
+        with: {persist-credentials: false, fetch-depth: 0}
       # setup-uv publishes only full tags (no @v10); pin the SHA.
       - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
         with: {python-version: "3.13", activate-environment: true, enable-cache: true, cache-dependency-glob: "src/requirements*.txt"}
       - run: uv pip install -r requirements.txt -r requirements-lab9.txt
       - run: python -m lab9.smoke
+      - name: Verify original Day08 source
+        run: python -c "from lab9.reproduce import verify_day8; print(verify_day8())"
+      - name: Read the base branch metric spec for the ratchet
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.sha || github.sha }}
+        run: git show "$BASE_REF:src/config/metric_spec.yaml" > reports/base_metric_spec.yaml
       - run: python -m pytest -q -m student -o addopts= -k "lab9 and not advanced"
       - run: python -m lab9.evalset --check
       - name: Evaluate and gate the PR swarm
         shell: bash
         run: |
           python -m lab9.eval --shape swarm --spec "$EVAL_SPEC" --out reports/eval_pr.json
-          python -m lab9.gate --pr reports/eval_pr.json --baseline "$EVAL_BASELINE" --spec "$EVAL_SPEC"
+          python -m lab9.gate --pr reports/eval_pr.json --baseline "$EVAL_BASELINE" --spec "$EVAL_SPEC" --base-spec reports/base_metric_spec.yaml
       - name: Check the committed baseline and the M3 metric
         run: python -m lab9.ci_check --pr reports/eval_pr.json --baseline "$EVAL_BASELINE" --spec "$EVAL_SPEC"
       - name: Verify the gate accepts fixed
@@ -69,7 +75,7 @@ jobs:
     defaults: {run: {working-directory: src}}
     steps:
       - uses: actions/checkout@v7
-        with: {persist-credentials: false}
+        with: {persist-credentials: false, fetch-depth: 0}
       - id: has
         run: "test -f reports/baseline_v2.json && echo v2=1 >> \"$GITHUB_OUTPUT\" || echo skip, no baseline_v2"
       - if: steps.has.outputs.v2
@@ -82,4 +88,20 @@ jobs:
       - if: steps.has.outputs.v2
         run: python -m lab9.evalset --v2
       - if: steps.has.outputs.v2
-        run: python -m lab9.mutation --spec config/metric_spec_v2.yaml --baseline reports/baseline_v2.json
+        name: Read the base branch v2 spec for the ratchet
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.sha || github.sha }}
+        run: git show "$BASE_REF:src/config/metric_spec_v2.yaml" > reports/base_metric_spec_v2.yaml
+      - if: steps.has.outputs.v2
+        run: python -m lab9.mutation --spec config/metric_spec_v2.yaml --base-spec reports/base_metric_spec_v2.yaml --baseline reports/baseline_v2.json
+      - if: steps.has.outputs.v2
+        name: Gate the current reference against v2 baseline and protected spec
+        run: |
+          python -m lab9.eval --shape swarm --spec config/metric_spec_v2.yaml --out reports/eval_pr_v2.json
+          python -m lab9.gate --pr reports/eval_pr_v2.json --baseline reports/baseline_v2.json --spec config/metric_spec_v2.yaml --base-spec reports/base_metric_spec_v2.yaml
+          python -m lab9.ci_check --pr reports/eval_pr_v2.json --baseline reports/baseline_v2.json --spec config/metric_spec_v2.yaml
+      - if: steps.has.outputs.v2
+        name: Public integrity traps
+        run: |
+          python -m lab9.eval --shape slice_regression --spec config/metric_spec_v2.yaml --out reports/eval_slice_regression.json
+          python -m lab9.traps --pr reports/eval_slice_regression.json --baseline reports/baseline_v2.json --spec config/metric_spec_v2.yaml
